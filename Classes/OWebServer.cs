@@ -36,6 +36,7 @@ using K2host.Certificates.Extentions;
 
 using gw = K2host.WebServer.OHelpers;
 using gl = K2host.Core.OHelpers;
+using K2host.WebServer.Delegates;
 
 namespace K2host.WebServer.Classes
 {
@@ -70,42 +71,42 @@ namespace K2host.WebServer.Classes
         /// This call back triggers before the response is sent back down the client connection / stream
         /// passes a byte[] array of the request data
         /// </summary>
-        public OServiceMethod OnBeforeHttpResponceSent;
+        public OnBeforeHttpResponceSentEvent OnBeforeHttpResponceSent;
 
         /// <summary>
         /// This call back triggers after the response is sent back down the client connection / stream
         /// passes a OTCPWebResponse object
         /// </summary>
-        public OServiceMethod OnAfterHttpResponceSent;
+        public OnAfterHttpResponceSentEvent OnAfterHttpResponceSent;
 
         /// <summary>
         /// This call back triggers as a new session is created on client connections.
         /// passes an OTCPWebApplication instance
         /// </summary>
-        public OServiceMethod OnSessionCreated;
+        public OnSessionCreatedEvent OnSessionCreated;
 
         /// <summary>
         /// This call back triggers as a session has timed out via the TTL (SessionsTimeToLive).
         /// passes an OTCPWebApplication instance before its disposed.
         /// </summary>
-        public OServiceMethod OnSessionUnloaded;
+        public OnSessionUnloadedEvent OnSessionUnloaded;
 
         /// <summary>
         /// This call back triggers before the request is processed by an application hosted.
         /// passes an OTCPWebRequest object
         /// </summary>
-        public OServiceMethod OnBeforeHttpRequestProcessed;
+        public OnBeforeHttpRequestProcessedEvent OnBeforeHttpRequestProcessed;
 
         /// <summary>
         /// This call back triggers after the request is processed by an application hosted.
         /// passes an OTCPWebRequest object
         /// </summary>
-        public OServiceMethod OnAfterHttpRequestProcessed;
+        public OnAfterHttpRequestProcessedEvent OnAfterHttpRequestProcessed;
 
         /// <summary>
         /// Used to pass back an exception that was sent via callbacks interanally.
         /// </summary>
-        public OServiceMethod OnWebServerErrorEvent;
+        public OnWebServerErrorEvent OnWebServerError;
 
         #endregion
 
@@ -487,7 +488,7 @@ namespace K2host.WebServer.Classes
         /// <param name="e"></param>
         public void ListenerServerError(Exception e)
         {
-            OnWebServerErrorEvent?.Invoke(e);
+            OnWebServerError?.Invoke(e);
         }
 
         /// <summary>

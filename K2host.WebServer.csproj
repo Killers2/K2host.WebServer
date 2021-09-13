@@ -2,6 +2,20 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/Killers2/K2host.WebServer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Killers2/K2host.WebServer</RepositoryUrl>
+    <Description>A WebServer libaray for creating a custom internet information service using sockets.
+The implementation supports TLS, SSL, SNI, HSTS, CORS, Routing (Virtual paths), Session based applications and more.
+Designed for Api driven services but can do a lot more.</Description>
+    <Authors>Tony N. Hyde</Authors>
+    <Company>K2host.co.uk</Company>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageIcon>Icon128.png</PackageIcon>
+    <PackageIconUrl />
+    <RepositoryType>GIT</RepositoryType>
+    <PackageTags>K2host, IIS, Internet Information Server, Web, Web Server, TCP Service Web Service</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -19,6 +33,17 @@
     <ProjectReference Include="..\K2host.Certificates\K2host.Certificates.csproj" />
     <ProjectReference Include="..\K2host.IO\K2host.IO.csproj" />
     <ProjectReference Include="..\K2host.Sockets\K2host.Sockets.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\K2host.Pictures\Icon128.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -8,3 +8,5 @@ The implementation supports TLS, SSL, SNI, HSTS, CORS, Routing (Virtual paths), 
 Designed for Api driven services but can do a lot more.
 
 Serves script based sites using the HtmlAgilityPack
+
+Nuget Package: https://www.nuget.org/packages/K2host.WebServer/
