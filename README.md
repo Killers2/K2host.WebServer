@@ -251,3 +251,51 @@ InternetInformationService.AddApplication(
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+At this point we need to call back any requests sent to the application and intercept so we can do what we want to the request and response.<br />
+There are 2 ways we can do this, if there is no route or file path for the given request we can intercept and responed here, otherwise we will get a page not found error from the server.<br />
+We can ofcourse have both.
+
+```c#
+InternetInformationService.GetApplication("<YOUR.DOMAINNAME.COM>")
+	.PageLoad += new OnORequestEvent(Request => {
+
+		//Do something with the request.
+		//Request
+
+	});
+```
+
+After which we can also add routes which can be virtual paths or paths to a file passing variables based on the route.
+As shown in the webconfig above.
+
+```c#
+
+    var app = InternetInformationService.GetApplication("<YOUR.DOMAINNAME.COM>");
+    if (!app.RouteTable.ContainsKey("<YOUR VIRTUAL PATH>"))
+	app.RouteTable.Add("<YOUR VIRTUAL PATH>", new OWebRoute("/<YOUR VIRTUAL PATH>", "/index.html") {
+	    OnRelay = new OnORequestEvent(request => {
+
+		//Do something with the request.
+		//Request
+
+
+	    })
+	});
+
+```
+---------------------------------------------------------------------------------------------------------------------------------------
+
+At this point we can start the server using :
+
+```c#
+InternetInformationService.Start();
+```
+---------------------------------------------------------------------------------------------------------------------------------------
+
+For destruction or disposing of the server we need to stop the dispose in this mannor.
+```c#
+	InternetInformationService?.Stop();
+	InternetInformationService?.Applications.Values.ForEach(webApplication => { webApplication.Dispose(); });
+	InternetInformationService?.Dispose();
+	InternetInformationService = null;
+```
