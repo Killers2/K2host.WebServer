@@ -14,6 +14,8 @@ Multi cert sites<br />
 Session based or Singleton based application instances<br />
 The code base in relies on the HtmlAgilityPack (https://html-agility-pack.net/)<br /><br />
 
+Nuget Package: https://www.nuget.org/packages/K2host.WebServer/
+
 # Designed for Api driven services but can do a lot more.<br /><br />
 
 ---------------------------------------------------------------------------------------------------------------------------------------
