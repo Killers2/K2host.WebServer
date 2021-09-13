@@ -103,12 +103,11 @@ In the application folder you will need:
 
 ![Dir](https://user-images.githubusercontent.com/5430175/133042901-bbc4cb74-efc1-4c5f-8a57-a26ee298bc1d.PNG)
 
-The refs.cfg file will have a list of libraries you application needs when compiling c# or vb.
+The refs.cfg file will have a list of libraries your application needs when compiling c# or vb, if your application is script based.
 
 ![refcfg](https://user-images.githubusercontent.com/5430175/133042921-b7234374-3171-4b9c-9345-f7b3b2619e5f.PNG)
 
-In the webconfig file you will see or will create one base on this layout.
-
+In the webconfig file you will see or will create one based on this layout.
 Adjust as you see fit.
 
 ```json
@@ -201,7 +200,7 @@ For CORS the "*" means any
 
 Now lets set up the server, In the root directory there is an error page with some placeholders which we can reuse for different errors.<br />
 
-# Lets add some error pages to the server base on the staus codes.
+# Lets add some error pages to the server based on the staus codes.
 
 ```c#
 InternetInformationService.StatusHTMLPages.Add(500, File.ReadAllText(InternetInformationService.RootDirectory + "\\error.html"));
@@ -292,7 +291,7 @@ InternetInformationService.Start();
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-For destruction or disposing of the server we need to stop the dispose in this mannor.
+For destruction or disposing of the server we need to stop the dispose in this manor.
 ```c#
 	InternetInformationService?.Stop();
 	InternetInformationService?.Applications.Values.ForEach(webApplication => { webApplication.Dispose(); });
