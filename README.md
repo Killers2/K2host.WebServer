@@ -3,8 +3,201 @@
 
 A WebServer libaray for creating a custom internet information service using sockets.
 
-The implementation supports TLS, SSL, SNI, HSTS, CORS, Routing (Virtual paths), Session based applications and more.
+The implementation supports :<br />
+This WebServer help host and serve applications running .net or / and html<br />
+Supports C# and VB.net code files.<br />
+Routing virtual paths<br />
+CORS Security<br />
+HSTS Security<br />
+Multi SSL/TLS certs on one port (SNI)<br />
+Multi cert sites<br />
+Session based or Singleton based application instances<br />
+The code base in relies on the HtmlAgilityPack (https://html-agility-pack.net/)<br /><br />
 
-Designed for Api driven services but can do a lot more.
+Designed for Api driven services but can do a lot more.<br /><br />
 
-Serves script based sites using the HtmlAgilityPack
+---------------------------------------------------------------------------------------------------------------------------------------
+
+First you need to create the web server object passing in a new thread manager and the default name for your server.
+
+```c#
+
+var InternetInformationService = new OWebServer(new OThreadManager(), "<DEFAULT SERVER NAME>")
+{
+    ServerCorsSecurityOverride      = false,
+    SessionsTimeToLive              = 1200, // seconds (20 mins)
+    RootDirectory                   = "<THE ROOT DIRECTORY OF THE SERVER>",
+    OnBeforeHttpResponceSent        = data => { },
+    OnAfterHttpResponceSent         = request => { },
+    OnBeforeHttpRequestProcessed    = request => { },
+    OnAfterHttpRequestProcessed     = request => { },
+    OnSessionUnloaded               = session => { },
+    OnSessionCreated                = session => { },
+    OnWebServerError                = exception => { }
+};
+```
+The properties are listed as : 
+```c#
+
+    //This is the name of the web server service instance which will also be placed in all responce headers.
+    public string ServerApplicationName { get; }
+
+    /// <summary>
+    /// This is the timeout to which a session will expire when there is no activity.
+    /// </summary>
+    public long SessionsTimeToLive { get; set; } // Seconds
+
+    /// <summary>
+    /// The thread manager instance added when this application is created.
+    /// </summary>
+    public IThreadManager ThreadManager { get; }
+
+    /// <summary>
+    /// This list hold the list of EndPoints for listeners
+    /// </summary>
+    public Dictionary<IPEndPoint, OHostType> EndPoints { get; set; }
+
+    /// <summary>
+    /// The list of tcp server base that will be doing the listening to incomming requests.
+    /// </summary>
+    public List<OServer> Listeners { get; set; }
+
+    /// <summary>
+    /// The list of loaded applications on this server.
+    /// </summary>
+    public ODictionary<Guid, List<string>, OWebApplication> Applications { get; }
+
+    /// <summary>
+    /// This allows the applications running on this server to allow all and any cors requests.
+    /// Will allow any cross domain access.
+    /// </summary>
+    public bool ServerCorsSecurityOverride { get; set; }
+
+    /// <summary>
+    /// This holds the list of html content as pages along with the status number.
+    /// </summary>
+    public Dictionary<int, string> StatusHTMLPages { get; }
+
+    /// <summary>
+    /// Place holders content for the html listed in the <see cref="StatusHTMLPages"/>
+    /// </summary>
+    public Dictionary<int, Dictionary<string, string>> StatusHTMLPagePlaceHolders { get; }
+
+    /// <summary>
+    /// The list of application instances that are loaded.
+    /// </summary>
+    public ConcurrentDictionary<string, OWebApplication> Sessions { get; set; }
+
+    /// <summary>
+    /// The server root directory of where the applications are held.
+    /// </summary>
+    public string RootDirectory { get; set; }
+        
+```
+At this point you will also need to setup the directory strucure for you applications.<br />
+Something like:
+
+![RootDir](https://user-images.githubusercontent.com/5430175/133041391-d5aa0871-6ba6-43f0-b620-d4450e4b37a8.PNG)
+
+In the application folder you will need:
+
+![Dir](https://user-images.githubusercontent.com/5430175/133042901-bbc4cb74-efc1-4c5f-8a57-a26ee298bc1d.PNG)
+
+The refs.cfg file will have a list of libraries you application needs when compiling c# or vb.
+
+![refcfg](https://user-images.githubusercontent.com/5430175/133042921-b7234374-3171-4b9c-9345-f7b3b2619e5f.PNG)
+
+In the webconfig file you will see or will create one base on this layout.
+
+Adjust as you see fit.
+
+```json
+{
+	"HostNames": [
+		"<THE.HOSTNAME.FORTHIS.APPLICATION.COM>"
+	],
+	"AllowSessions": false,
+	"DefaultWebPage": "index.html",
+	"SSL": {
+		"AllowHttps": true,
+		"CertificateNames": [
+			"<THE CERT NAME AS IN THE CERT STORE / FRIENDLY NAME>"
+		]
+	},
+	"CORS": {
+		"AllowCors": true,
+		"CorsAllowOrigin": [
+			"<THE.HOSTNAME.FORTHIS.APPLICATION.COM>",
+			"*"
+		],
+		"CorsAllowMethods": [
+			"POST",
+			"GET",
+			"DELETE",
+			"OPTIONS",
+			"PUT",
+			"PATCH"
+		],
+		"CorsAllowHeaders": [
+			"*"
+		],
+		"CorsMaxAgeSeconds": "300"
+	},
+	"HSTS": {
+		"Enabled": false,
+		"MaxAge": "1000",
+		"IncludeSubDomains": false,
+		"PreLoad": false,
+		"CPS": {
+			"Content-Security-Policy": "",
+			"Content-Security-Policy-Report-Only": ""
+		}
+	},
+	"CODE": {
+		"RunTimeCompile": false,
+		"DotNetResoucesExtention": [
+			".aspx",
+			".ascx"
+		],
+		"DotNetCodeExtention": [
+			".cs",
+			".vb"
+		],
+		"RouteTable": [
+			{
+				"/updates": "/update/service.aspx"
+			},
+			{
+				"/testlong/{id}/another/{uuid}": "/testfolder/tester.aspx"
+			},
+			{
+				"/testtwoid/{id}/{uuid}": "/testfolder/tester.aspx"
+			},
+			{
+				"/testid/{id}/{uuid}/something/{uid}": "/testfolder/tester.aspx"
+			},
+			{
+				"/something/{id}": "/testfolder/tester.aspx"
+			}
+    ]
+	},
+	"ApplicationSettings": [
+		{
+			"databaseConnectionString": "<THE CONNECTION STRING>"
+		},
+		{
+			"SOMEKEY": "SOMESETTING"
+		},
+		{
+			"SOMEKEY": "SOME SETTING"
+		}
+  ]
+}
+```
+The ApplicationSettings can be an empty array as well as the RouteTable option.
+For CORS the "*" means any
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+
