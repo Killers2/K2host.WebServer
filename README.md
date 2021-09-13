@@ -199,5 +199,55 @@ For CORS the "*" means any
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+Now lets set up the server, In the root directory there is an error page with some placeholders which we can reuse for different errors.<br />
 
+Lets add some error pages to the server base on the staus codes.
+
+```c#
+InternetInformationService.StatusHTMLPages.Add(500, File.ReadAllText(InternetInformationService.RootDirectory + "\\error.html"));
+InternetInformationService.StatusHTMLPages.Add(404, File.ReadAllText(InternetInformationService.RootDirectory + "\\error.html"));
+InternetInformationService.StatusHTMLPages.Add(403, File.ReadAllText(InternetInformationService.RootDirectory + "\\error.html"));
+
+InternetInformationService.StatusHTMLPagePlaceHolders.Add(500, new Dictionary<string, string>() {
+	{ "<%placeholder_title%>",      "500 Server Error" },
+	{ "<%placeholder_header%>",     "500 Server Error" },
+	{ "<%placeholder_message%>",    "<%Exception%>" }
+});
+
+InternetInformationService.StatusHTMLPagePlaceHolders.Add(404, new Dictionary<string, string>() {
+	{ "<%placeholder_title%>",      "404 Not Found" },
+	{ "<%placeholder_header%>",     "404 Not Found" },
+	{ "<%placeholder_message%>",    "<%Exception%>" }
+});
+
+InternetInformationService.StatusHTMLPagePlaceHolders.Add(403, new Dictionary<string, string>() {
+	{ "<%placeholder_title%>",      "403 Forbidden" },
+	{ "<%placeholder_header%>",     "403 Forbidden" },
+	{ "<%placeholder_message%>",    "<%Exception%>" }
+});
+```
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Now lets add some end points for the listener.
+
+```c#
+InternetInformationService.AddListeners(new Dictionary<IPEndPoint, OHostType>() {
+	{ new IPEndPoint(IPAddress.Parse("<YOUR IP ADDRESS>"), 80), OHostType.HTTP },
+	{ new IPEndPoint(IPAddress.Parse("<YOUR IP ADDRESS>"), 443), OHostType.HTTPS }
+}.ToArray());
+```
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+Now lets add an application to the service. The first added application is the primary app for the server.
+
+```c#
+InternetInformationService.AddApplication(
+	new OWebApplication(
+		InternetInformationService.RootDirectory + @"\<YOUR APPLICATION PATH>",
+		InternetInformationService.EndPoints.Keys.ToArray()
+	)
+);
+```
+---------------------------------------------------------------------------------------------------------------------------------------
 
