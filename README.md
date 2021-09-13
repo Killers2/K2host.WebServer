@@ -14,7 +14,7 @@ Multi cert sites<br />
 Session based or Singleton based application instances<br />
 The code base in relies on the HtmlAgilityPack (https://html-agility-pack.net/)<br /><br />
 
-Designed for Api driven services but can do a lot more.<br /><br />
+# Designed for Api driven services but can do a lot more.<br /><br />
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -201,7 +201,7 @@ For CORS the "*" means any
 
 Now lets set up the server, In the root directory there is an error page with some placeholders which we can reuse for different errors.<br />
 
-Lets add some error pages to the server base on the staus codes.
+# Lets add some error pages to the server base on the staus codes.
 
 ```c#
 InternetInformationService.StatusHTMLPages.Add(500, File.ReadAllText(InternetInformationService.RootDirectory + "\\error.html"));
@@ -228,7 +228,7 @@ InternetInformationService.StatusHTMLPagePlaceHolders.Add(403, new Dictionary<st
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Now lets add some end points for the listener.
+# Now lets add some end points for the listener.
 
 ```c#
 InternetInformationService.AddListeners(new Dictionary<IPEndPoint, OHostType>() {
@@ -239,7 +239,7 @@ InternetInformationService.AddListeners(new Dictionary<IPEndPoint, OHostType>() 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Now lets add an application to the service. The first added application is the primary app for the server.
+# Now lets add an application to the service. The first added application is the primary app for the server.
 
 ```c#
 InternetInformationService.AddApplication(
@@ -285,7 +285,7 @@ As shown in the webconfig above.
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-At this point we can start the server using :
+# At this point we can start the server using :
 
 ```c#
 InternetInformationService.Start();
