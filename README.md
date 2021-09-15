@@ -96,7 +96,7 @@ The properties are listed as :
     public string RootDirectory { get; set; }
         
 ```
-At this point you will also need to setup the directory strucure for you applications.<br />
+At this point you will also need to setup the directory structure for you applications.<br />
 Something like:
 
 ![RootDir](https://user-images.githubusercontent.com/5430175/133041391-d5aa0871-6ba6-43f0-b620-d4450e4b37a8.PNG)
@@ -105,7 +105,8 @@ In the application folder you will need:
 
 ![Dir](https://user-images.githubusercontent.com/5430175/133042901-bbc4cb74-efc1-4c5f-8a57-a26ee298bc1d.PNG)
 
-The refs.cfg file will have a list of libraries your application needs when compiling c# or vb, if your application is script based.
+The refs.cfg file will have a list of libraries your application needs when compiling c# or vb, if your application is script based.<br />
+This is an exmple:
 
 ![refcfg](https://user-images.githubusercontent.com/5430175/133042921-b7234374-3171-4b9c-9345-f7b3b2619e5f.PNG)
 
@@ -293,7 +294,7 @@ InternetInformationService.Start();
 ```
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-For destruction or disposing of the server we need to stop the dispose in this manor.
+For destruction or disposing of the server we need to stop and dispose in this manor.
 ```c#
 	InternetInformationService?.Stop();
 	InternetInformationService?.Applications.Values.ForEach(webApplication => { webApplication.Dispose(); });
