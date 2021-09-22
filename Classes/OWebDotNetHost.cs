@@ -30,7 +30,7 @@ namespace K2host.WebServer.Classes
     //    OTCPWebDotNetHost h = (OTCPWebDotNetHost)ApplicationHost.CreateApplicationHost(
     //         typeof(OTCPWebDotNetHost),
     //         "/",
-    //         @"D:\Development\WorkFlow Systems\LiquidStream\LiquidObjects\bin\Debug\WebService\root\SymSign"
+    //         @"D:\Development\WorkFlow Systems\bin\Debug\WebService\root\someapp"
     //     );
 
     //    string x = @"D:\Development\WorkFlow Systems\LiquidStream\LiquidObjects\bin\Debug\WebService\root\SymSign\Processor.aspx";
