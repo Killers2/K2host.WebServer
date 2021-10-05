@@ -1,7 +1,7 @@
 
 # K2host.WebServer
 
-A WebServer libaray for creating a custom internet information service using sockets.
+A WebServer library for creating a custom internet information service using sockets.
 
 The implementation supports :<br />
 This WebServer help host and serve applications running .net or / and html<br />
