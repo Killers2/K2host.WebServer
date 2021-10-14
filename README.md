@@ -1,10 +1,10 @@
 
 # K2host.WebServer
 
-A WebServer libaray for creating a custom internet information service using sockets.
+A C# Http Web Server library for creating a custom internet information service using sockets.
 
 The implementation supports :<br />
-This WebServer help host and serve applications running .net or / and html<br />
+This WebServer will help host and serve applications running .net or / and html<br />
 Supports C# and VB.net code files.<br />
 Routing virtual paths<br />
 CORS Security<br />
