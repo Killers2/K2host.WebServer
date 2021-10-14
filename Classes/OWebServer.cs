@@ -33,10 +33,10 @@ using K2host.Threading.Extentions;
 using K2host.Threading.Interface;
 using K2host.Certificates.Interfaces;
 using K2host.Certificates.Extentions;
+using K2host.WebServer.Delegates;
 
 using gw = K2host.WebServer.OHelpers;
 using gl = K2host.Core.OHelpers;
-using K2host.WebServer.Delegates;
 
 namespace K2host.WebServer.Classes
 {
