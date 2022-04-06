@@ -1069,7 +1069,7 @@ namespace K2host.WebServer.Classes
             else
             {
 
-                OCertification cs = new(string.Empty)
+                OCertification cs = new()
                 {
                     IsCertificationAuthority    = false,
                     SubjectName                 = "CN=" + certName,

@@ -16,6 +16,7 @@ Designed for Api driven services but can do a lot more.</Description>
     <PackageIconUrl />
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>K2host, IIS, Internet Information Server, Web, Web Server, TCP Service Web Service</PackageTags>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -23,7 +24,7 @@ Designed for Api driven services but can do a lot more.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack" Version="1.11.33" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
