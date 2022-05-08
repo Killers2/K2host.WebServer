@@ -16,11 +16,12 @@ Designed for Api driven services but can do a lot more.</Description>
     <PackageIconUrl />
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>K2host, IIS, Internet Information Server, Web, Web Server, TCP Service Web Service</PackageTags>
-    <Version>1.0.5</Version>
+    <Version>2.0.6</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <Optimize>true</Optimize>
+    <OutputPath>D:\Development\K2host Works\K2host.Packages\K2host.WebServer\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
